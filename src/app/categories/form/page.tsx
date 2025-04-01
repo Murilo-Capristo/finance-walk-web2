@@ -4,6 +4,7 @@ import { createCategory } from "@/actions/category-actions";
 import NavBar from "@/components/nav-bar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { error } from "console";
 import { ArrowLeft, Check } from "lucide-react";
 import Link from "next/link";
 import { useActionState } from "react";
@@ -14,6 +15,10 @@ export default function CategoryFormPage() {
         values: {
             name: "",
             icon: ""
+        },
+        errors:{
+            name:"",
+            icon:""
         }
     }
 
@@ -28,8 +33,18 @@ export default function CategoryFormPage() {
                     <h2 className="text-xl font-semibold mb-4">Cadastrar Categoria</h2>
 
                     <form action={formAction} className="space-y-4">
-                        <Input name="name" placeholder="nome da categoria" />
-                        <Input name="icon" placeholder="nome do ícone" />
+                        <div>
+                                <Input name="name" placeholder="nome da categoria" defaultValue={state?.values.name}/>
+                                <span className="text-sm text-destructive" >{state?.errors.name}</span>
+
+                        </div>
+                        <div>
+                            <Input name="icon" placeholder="nome do ícone" defaultValue={state?.values.icon}/>
+                            <span className="text-sm text-destructive">{state?.errors.icon}</span>
+
+
+                        </div>
+                        
 
                         <div className="flex justify-between">
                             <Button variant={"outline"} asChild>
